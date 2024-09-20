@@ -7,13 +7,16 @@ import { API } from '@/lib/config';
 import Loading from '../loading';
 import { DataTable } from '@/components/ui/data-table';
 import { columns } from '../Columns';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 const List = () => {
+    const router  = useRouter();
 
    const { isLoading, isError, data } = useQuery({
         queryKey: ['category'],
         queryFn: () => axios.get(`${API}/admin/category`).then(res => res.data),
-        staleTime: 60 * 1000,  // 60 seconds
+        staleTime: 3 * 1000,  // 60 seconds
         retry: 3 // retry fetching 3 times on failure
     });
 
@@ -26,7 +29,12 @@ const List = () => {
     }
 
     return (
-        <div>
+        <div className='my-4 space-y-4 sm:p-6 lg:p-2'>
+            <div className='flex justify-end'>
+            <Button variant={'gafow'}
+        onClick={() => router.push('/dashboard/admin/category/new')}
+        >Create new Category</Button>
+            </div>
             <DataTable columns={columns} data={data} />
         </div>
     );

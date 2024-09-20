@@ -28,9 +28,9 @@ export const AlertDialogBox = async({id}: {id: string}) => {
         setLoading(true);
         try {
             await axios.delete(`${API}/admin/category/${id}`)
-            queryClient.invalidateQueries({queryKey: ["category"]});
+            // queryClient.invalidateQueries({queryKey: ["category"]});
 
-            toast.success("Category Deleted Successful")
+            toast.success("Category Deleted Successful✅")
             // router.push('/dashboard/admin/category')
             setLoading(false)
         }catch(e){
@@ -44,7 +44,7 @@ export const AlertDialogBox = async({id}: {id: string}) => {
     <AlertDialog>
     <AlertDialogTrigger>
     {loading ?  <Button variant={'destructive'} className="flex justify-center items-center space-x-2 gap-x-1">
-        Deleting
+        
        <Loader2 className="animate-spin h-5 w-5 text-white"/>
       </Button> : <Button variant={'destructive'}>Delete</Button>}
 

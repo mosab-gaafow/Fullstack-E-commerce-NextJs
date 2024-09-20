@@ -30,7 +30,11 @@ export async function POST(request: NextRequest) {
 
 export async function GET (request: NextRequest) {
 
-    const categories = await prisma.category.findMany();
+    const categories = await prisma.category.findMany({
+        orderBy: {
+            created: "desc"
+        }
+    });
 
     if(!categories) {
         return NextResponse.json("No Categories Found..");
